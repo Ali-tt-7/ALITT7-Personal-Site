@@ -1,0 +1,15 @@
+load("//anybuild/tools:python.bzl", "python_build", "python_config", "python_serve")
+
+config = python_config(
+    schema = 1,
+    commands = {
+        "start": "uvicorn app.main:app --host 0.0.0.0 --port 8080",
+    },
+    python_main_file = "app/main.py",
+    python_version = "3.13",
+    python_extra_index_url = "https://python-registry.wasix.org/simple",
+)
+
+build = python_build(config)
+
+python_serve(config, build, name = "alitt7-personal-site")
